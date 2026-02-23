@@ -23,7 +23,7 @@ app.post('/chat', async (req, res) => {
       'HTTP-Referer': 'https://yourportfolio.netlify.app',
     },
     body: JSON.stringify({
-      model: 'google/gemma-3-27b-it:free',
+      model: 'nvidia/nemotron-3-nano-30b-a3b:free',
       messages,
     }),
   });
