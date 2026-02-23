@@ -7,6 +7,11 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
+// ✅ Add this root route
+app.get('/', (req, res) => {
+  res.json({ status: 'AI Backend is running ✅', message: 'Use POST /chat to send messages' });
+});
+
 app.post('/chat', async (req, res) => {
   const { messages } = req.body;
 
@@ -18,7 +23,7 @@ app.post('/chat', async (req, res) => {
       'HTTP-Referer': 'https://yourportfolio.netlify.app',
     },
     body: JSON.stringify({
-      model: 'google/gemma-3-27b-it:free', // free model
+      model: 'google/gemma-3-27b-it:free',
       messages,
     }),
   });
@@ -27,4 +32,5 @@ app.post('/chat', async (req, res) => {
   res.json(data);
 });
 
-app.listen(3001, () => console.log('Server running on port 3001'));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
